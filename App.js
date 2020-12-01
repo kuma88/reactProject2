@@ -1,11 +1,31 @@
 import { StatusBar } from 'expo-status-bar';
-import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import React, {useState} from 'react';
+import { Button, StyleSheet, Text, View, Touchable, TouchableOpacity, } from 'react-native';
 
 export default function App() {
+  const [count, setCount] = useState(0);
+
+  function increment() {
+    setCount(count + 1);
+  }
+
+  function renderEncouragingText(){
+    if (count == 10){
+      return "Keep Going"
+    }else if (count == 20){
+      return " Great Job, Keep going"
+    }
+  }
+
   return (
     <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
+      <Text style={styles.text}> {count}</Text>
+      <TouchableOpacity onPress={increment} style={styles.button}>
+        <Text style={styles.buttonText}>
+          Press me!
+        </Text>
+      </TouchableOpacity>
+      <Text style ={styles.encouragingText}>{renderEncouragingText()} </Text>
       <StatusBar style="auto" />
     </View>
   );
@@ -18,4 +38,32 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
   },
+
+  text: {
+    color:"red",
+    fontSize: 50,
+    fontWeight: "bold",
+  },
+
+  encouragingText:{
+    marginTop:50,
+    color:'#aaaaaa',
+    fontSize: 30,
+    
+  },
+
+  button: {
+    backgroundColor: 'red',
+    padding: 20,
+    borderRadius: 10,
+    marginTop: 20
+  },
+
+  buttonText: {
+    color: 'white',
+    fontWeight: 'bold',
+    fontSize: 40,
+  }
+
+
 });
